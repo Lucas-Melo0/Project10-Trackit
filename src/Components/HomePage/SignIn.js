@@ -1,28 +1,40 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import sendData from "../../API/sendData";
 export default function SignIn() {
 
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         email: "",
-        password:""
-        
+        password: ""
+
     });
 
-    function handleSubmit(event){
+    function handleSubmit(event) {
         event.preventDefault();
         sendData("/auth/login", form)
-        .catch((error) => {
-            console.log(error)
-            alert("Digite dados validos")
-        })
-        .then((value) => console.log(value))
+            .catch((error) => {
+                console.log(error)
+                alert("Digite dados validos")
+            })
+            .then((value) => {
+                if (value.statusText === "OK") {
+                    console.log(value)
+                    navigate("/habitos")
+
+                }
+
+            })
     }
-    function handleForm(event){
-        setForm({...form,
-        [event.target.name]: event.target.value}
-        )}
-        console.log(form)
+    function handleForm(event) {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value
+        }
+        )
+    }
+    console.log(form)
     return (
         <FormStyle onSubmit={handleSubmit}>
             <input name="email" onChange={handleForm} placeholder="email"></input>
@@ -72,4 +84,4 @@ const ButtonContainer = styled.div`
     border-radius: 4.6px;
     }
 `
-export {FormStyle, ButtonContainer}
+export { FormStyle, ButtonContainer }
