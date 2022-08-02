@@ -1,5 +1,7 @@
+import Header from "../Header/Header";
 export default function HabitsContainer(){
     return (
-        <h1>habitoo</h1>
+        <Header/>
     )
 }
+
