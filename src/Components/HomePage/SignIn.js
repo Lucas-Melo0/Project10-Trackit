@@ -1,13 +1,32 @@
 import styled from "styled-components";
 import { useState } from "react";
+import sendData from "../../API/sendData";
 export default function SignIn() {
 
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        email: "",
+        password:""
+        
+    });
 
+    function handleSubmit(event){
+        event.preventDefault();
+        sendData("/auth/login", form)
+        .catch((error) => {
+            console.log(error)
+            alert("Digite dados validos")
+        })
+        .then((value) => console.log(value))
+    }
+    function handleForm(event){
+        setForm({...form,
+        [event.target.name]: event.target.value}
+        )}
+        console.log(form)
     return (
-        <FormStyle>
-            <input placeholder="email"></input>
-            <input placeholder="senha"></input>
+        <FormStyle onSubmit={handleSubmit}>
+            <input name="email" onChange={handleForm} placeholder="email"></input>
+            <input type="password" name="password" onChange={handleForm} placeholder="senha"></input>
             <ButtonContainer>
                 <button>Entrar</button>
             </ButtonContainer>
@@ -46,6 +65,9 @@ const ButtonContainer = styled.div`
     button {
     all: unset;
     width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #52B6FF;
     border-radius: 4.6px;
     }
