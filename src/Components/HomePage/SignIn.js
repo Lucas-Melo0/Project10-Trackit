@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import sendData from "../../API/sendData";
-export default function SignIn() {
+export default function SignIn({setUserInfo}) {
 
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -21,6 +21,8 @@ export default function SignIn() {
             .then((value) => {
                 if (value.statusText === "OK") {
                     console.log(value)
+                    localStorage.setItem(value.data.name, JSON.stringify({token:value.data.token}));
+                    setUserInfo(value.data)
                     navigate("/habitos")
 
                 }

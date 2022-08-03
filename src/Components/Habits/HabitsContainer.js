@@ -1,7 +1,10 @@
-import Header from "../Header/Header";
-export default function HabitsContainer(){
+export default function HabitsContainer({userInfo}){
+   
+   
+
     return (
-        <Header/>
+        <h1>oi</h1>
     )
 }
+
 

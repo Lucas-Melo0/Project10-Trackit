@@ -1,9 +1,10 @@
 import styled from "styled-components";
-export default function Header() {
+export default function Header({userInfo}) {
+
     return (
         <HeaderContainer>
             <span>Trackit</span>
-            <p>bbbbb</p>
+            <img src={userInfo.image}/>
         </HeaderContainer>
     )
 }
@@ -22,5 +23,10 @@ const HeaderContainer = styled.header`
     font-weight: 400;
     font-size: 39px;
     color: #FFFFFF;
+    }
+    img {
+    width: 51px;
+    height: 51px;
+    border-radius: 98.5px;
     }
 `
