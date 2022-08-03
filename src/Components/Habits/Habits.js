@@ -3,6 +3,7 @@ import { useState } from "react";
 import {createHabit} from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import { weekLetters } from "../../auxiliary/days";
 
 
 
@@ -12,7 +13,7 @@ export default function Habits({setButtonStatus}) {
     const [input, setInput] = useState({name:""});
     const [days,setDays] = useState([]);
     const [selected, setSelected] = useState(false);
-    const weekLetters = [ "S", "T", "Q", "Q", "S", "S","D"];
+    
 
     function handleChange(event){
         setInput({
@@ -81,7 +82,7 @@ const WeekButtonContainer = styled.div`
     display: flex;
     column-gap: 3px;
 
-  
+    
 `
 
 const WeekButton = styled.button `
@@ -132,3 +133,4 @@ const SaveButton = styled.button `
 
 
 `
+export {WeekButton, WeekButtonContainer}

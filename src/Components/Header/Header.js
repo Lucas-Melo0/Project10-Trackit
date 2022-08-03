@@ -4,7 +4,7 @@ export default function Header({userInfo}) {
     return (
         <HeaderContainer>
             <span>Trackit</span>
-            <img src={userInfo.image}/>
+            <img src={userInfo.image} alt="user "/>
         </HeaderContainer>
     )
 }

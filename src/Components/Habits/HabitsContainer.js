@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Habits from "./Habits";
 import { useState } from "react";
+import ListHabits from "./ListHabits";
 export default function HabitsContainer() {
 
     const [buttonStatus, setButtonStatus] = useState(false);
@@ -15,6 +16,7 @@ export default function HabitsContainer() {
                 {
                     buttonStatus && <Habits setButtonStatus={setButtonStatus}></Habits>
                 }
+                <ListHabits/>
                 <NoHabitsParagraph>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsParagraph>
             </Container>
 

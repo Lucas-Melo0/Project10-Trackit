@@ -8,5 +8,8 @@ function createHabit (data, token){
     return axiosBase.post("/habits",data, {headers: {"Authorization": `Bearer ${token}`}});
 
 }
+function getHabits(token) {
+    return axiosBase.get('/habits', { headers: { 'Authorization': `Bearer ${token}` } });
+}
 
-export {sendData, createHabit};
+export {sendData, createHabit, getHabits};
