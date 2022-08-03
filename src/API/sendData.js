@@ -1,5 +1,12 @@
 import axiosBase from "./axiosBase";
 
-export default function sendData(url, data){
+function sendData(url, data){
     return axiosBase.post(url, data);
 };
+
+function createHabit (data, token){
+    return axiosBase.post("/habits",data, {headers: {"Authorization": `Bearer ${token}`}});
+
+}
+
+export {sendData, createHabit};

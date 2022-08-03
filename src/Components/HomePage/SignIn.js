@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
-import sendData from "../../API/sendData";
+import {sendData} from "../../API/sendData";
 export default function SignIn() {
 
     const {setUserInfo} = useContext(UserContext)

@@ -4,7 +4,7 @@ import { Container } from "../HomePage/HomePageContainer";
 import { FormStyle, ButtonContainer } from "../HomePage/SignIn";
 import { LinkText } from "../HomePage/SignUpLink";
 import { Link } from "react-router-dom";
-import sendData from "../../API/sendData";
+import {sendData} from "../../API/sendData";
 import {ThreeDots} from 'react-loader-spinner'
 import { useNavigate } from "react-router-dom";
 export default function SignUpContainer() {

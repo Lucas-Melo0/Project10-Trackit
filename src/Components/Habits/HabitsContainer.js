@@ -13,7 +13,7 @@ export default function HabitsContainer() {
                     <button onClick={()=>setButtonStatus(true)}>+</button>
                 </AddHabitContainer>
                 {
-                    buttonStatus && <Habits></Habits>
+                    buttonStatus && <Habits setButtonStatus={setButtonStatus}></Habits>
                 }
                 <NoHabitsParagraph>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsParagraph>
             </Container>

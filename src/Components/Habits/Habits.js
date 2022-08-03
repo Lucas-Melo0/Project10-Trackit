@@ -1,27 +1,63 @@
 import styled from "styled-components";
-export default function Habits() {
+import { useState } from "react";
+import {createHabit} from "../../API/sendData";
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
-    const weekLetters = ["D", "S", "T", "Q", "Q", "S", "S"]
+
+
+
+export default function Habits({setButtonStatus}) {
+    const {userInfo} = useContext(UserContext)
+    const [input, setInput] = useState({name:""});
+    const [days,setDays] = useState([]);
+    const [selected, setSelected] = useState(false);
+    const weekLetters = [ "S", "T", "Q", "Q", "S", "S","D"];
+
+    function handleChange(event){
+        setInput({
+            ...input,
+            [event.target.name] : event.target.value
+        })
+        console.log(input)
+       
+    }
+   
+    function getDays(index){
+        setDays([...days,index + 1])
+        setSelected(true);
+        if ([...days].includes(index + 1)){
+            setDays([...days].filter(element => element !== index + 1))
+            setSelected(false);
+        }
+        console.log(days)
+        console.log(selected)
+    }
+
+    function HandleSubmit(){
+        createHabit({name:input.name,days:days},userInfo.token)
+        .catch((value) => console.log(value))
+        .then((value)=> console.log(value));
+    }
 
     return (
         <HabitsCard>
-            <input placeholder="nome do hábito"></input>
+            <input name ="name" onChange={handleChange} placeholder="nome do hábito"></input>
             <WeekButtonContainer>
                 {
-                    weekLetters.map(value => <button>{value}</button>)
+                    weekLetters.map((value,index) => <WeekButton onClick={()=> getDays(index)} selected={selected} >{value}</WeekButton>)
                 }
             </WeekButtonContainer>
             <ResultButtonContainer>
-                    <CancelButton>Cancelar</CancelButton>
-                    <SaveButton>Salvar</SaveButton>
+                    <CancelButton onClick={()=>setButtonStatus(false)}>Cancelar</CancelButton>
+                    <SaveButton onClick={HandleSubmit}>Salvar</SaveButton>
             </ResultButtonContainer>
-            
-
         </HabitsCard>
 
     )
 
 }
+
 
 const HabitsCard = styled.div`
     row-gap: 10px;
@@ -45,26 +81,32 @@ const WeekButtonContainer = styled.div`
     display: flex;
     column-gap: 3px;
 
-    button {
+  
+`
+
+const WeekButton = styled.button `
+
         all:unset;
         text-align: center;
         border: #DBDBDB 1px solid;
         font-size: 20px;
         border-radius:5px;
         font-family: 'Lexend Deca', sans-serif;
-        color: #DBDBDB;
+        color: ${({ selected }) => (selected ? "#FFFFFF" : "#DBDBDB;")};
+        background-color: ${({ selected }) => (selected ? "#CFCFCF" : "#FFFFFF;")};
         width: 30px;
         height: 30px;
 
-    }
 `
+
 const ResultButtonContainer = styled.div `
+
     display: flex;
     column-gap:10px;
     justify-content:flex-end
 
 `
-
+    
 const CancelButton = styled.button `
 
 
