@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import sendData from "../../API/sendData";
-export default function SignIn({setUserInfo}) {
+export default function SignIn() {
 
+    const {setUserInfo} = useContext(UserContext)
     const navigate = useNavigate();
     const [form, setForm] = useState({
         email: "",

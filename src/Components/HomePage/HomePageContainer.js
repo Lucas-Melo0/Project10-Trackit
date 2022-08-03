@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import Logo from '../Logo/Logo';
 import SignIn from './SignIn';
 import SignUpLink from './SignUpLink';
-export default function HomePageContainer({setUserInfo}){
+export default function HomePageContainer(){
     return (
         <Container>
             <Logo></Logo>
-            <SignIn setUserInfo={setUserInfo}></SignIn>
+            <SignIn ></SignIn>
             <SignUpLink></SignUpLink>
         </Container>
         

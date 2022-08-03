@@ -1,5 +1,10 @@
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-export default function RequireAuth({ children, userInfo }) {
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
+export default function RequireAuth({ children }) {
+
+    const {userInfo} = useContext(UserContext)
 
     
     const auth = JSON.parse(localStorage.getItem(userInfo.name));
@@ -11,6 +16,7 @@ export default function RequireAuth({ children, userInfo }) {
         <>
             <Header userInfo={userInfo}/>
             {children}
+            <Footer/>
         </>
 
     )
