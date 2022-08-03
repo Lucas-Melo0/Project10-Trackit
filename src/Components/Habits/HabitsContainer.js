@@ -1,21 +1,72 @@
 import styled from "styled-components";
-export default function HabitsContainer(){
-   
-   
+import Habits from "./Habits";
+import { useState } from "react";
+export default function HabitsContainer() {
+
+    const [buttonStatus, setButtonStatus] = useState(false);
 
     return (
         <Wrapper>
-            <h1>a</h1>
+            <Container>
+                <AddHabitContainer>
+                    <span>Meus hábitos</span>
+                    <button onClick={()=>setButtonStatus(true)}>+</button>
+                </AddHabitContainer>
+                {
+                    buttonStatus && <Habits></Habits>
+                }
+                <NoHabitsParagraph>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsParagraph>
+            </Container>
 
         </Wrapper>
-        
+
     )
 }
-const Wrapper = styled.div `
+
+
+const Wrapper = styled.div`
     width: 100vw;
-    height: 100vh;
-    background-color: #E5E5E5;
+    min-height:90vh;
+    background-color: #F2F2F2;
 `
+const Container = styled.div`
+    display: flex;
+    flex-direction:column;
+    row-gap:20px;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 20px 0;
+`
+const AddHabitContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    span {
+    font-size: 23px;
+    color: #126BA5;
+    font-family: 'Lexend Deca', sans-serif;
+    }
+    button {
+    all:unset;
+    color: #FFFFFF;
+    font-size: 30px;
+    text-align: center;
+    width: 40px;
+    height: 35px;
+    background: #52B6FF;
+    border-radius: 4.6px;
+    }
+`
+const NoHabitsParagraph = styled.p `
+    font-size: 18px;
+    color: #666666;
+    font-family: 'Lexend Deca', sans-serif;
+
+`
+
+
 
 
 
