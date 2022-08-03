@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { weekLetters } from "../../auxiliary/days";
 import { WeekButton, WeekButtonContainer } from "./Habits";
 import { FaTrash } from 'react-icons/fa';
-import { getHabits } from "../../API/sendData";
+import { deleteHabit, getHabits } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
+
 
 export default function ListHabits() {
 
@@ -28,7 +29,7 @@ export default function ListHabits() {
 
                         <HabitsCard key={index}>
                             <p>{value.name}</p>
-                            <FaTrash />
+                            <FaTrash onClick={()=> deleteHabit(value.id,userInfo.token)}/>
                             <WeekButtonContainer>
                                 {
                                     weekLetters.map((letters) => <WeekButton>{letters}</WeekButton>)

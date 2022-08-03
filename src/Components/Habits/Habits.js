@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import {createHabit} from "../../API/sendData";
+import { createHabit } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { weekLetters } from "../../auxiliary/days";

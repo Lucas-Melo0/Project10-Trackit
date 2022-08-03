@@ -11,5 +11,8 @@ function createHabit (data, token){
 function getHabits(token) {
     return axiosBase.get('/habits', { headers: { 'Authorization': `Bearer ${token}` } });
 }
+function deleteHabit(id,token) {
+    return axiosBase.delete(`/habits/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+}
 
-export {sendData, createHabit, getHabits};
+export {sendData, createHabit, getHabits, deleteHabit};
