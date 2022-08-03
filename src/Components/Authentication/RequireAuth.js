@@ -1,7 +1,8 @@
-import Footer from "../Footer/Footer";
+
 import Header from "../Header/Header";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import FooterContainer from "../Footer/FooterContainer";
 export default function RequireAuth({ children }) {
 
     const {userInfo} = useContext(UserContext)
@@ -16,7 +17,7 @@ export default function RequireAuth({ children }) {
         <>
             <Header userInfo={userInfo}/>
             {children}
-            <Footer/>
+            <FooterContainer/>
         </>
 
     )

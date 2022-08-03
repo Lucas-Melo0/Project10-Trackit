@@ -12,9 +12,9 @@ export default function HabitsContainer(){
     )
 }
 const Wrapper = styled.div `
-    width: 90vw;
-    margin: 0 auto;
-    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    background-color: #E5E5E5;
 `
 
 
