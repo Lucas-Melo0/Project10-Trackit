@@ -63,7 +63,7 @@ const FormStyle = styled.form`
     font-size: 20px;
     width: inherit;
     height: 45px;
-    background: #FFFFFF;
+    background: ${({isLoading})=> (isLoading ? "#F2F2F2" :"#FFFFFF")};
     border: 1px solid #D5D5D5;
     border-radius: 5px;
     }

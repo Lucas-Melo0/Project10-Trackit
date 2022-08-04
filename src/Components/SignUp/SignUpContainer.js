@@ -4,55 +4,73 @@ import { Container } from "../HomePage/HomePageContainer";
 import { FormStyle, ButtonContainer } from "../HomePage/SignIn";
 import { LinkText } from "../HomePage/SignUpLink";
 import { Link } from "react-router-dom";
-import {sendData} from "../../API/sendData";
-import {ThreeDots} from 'react-loader-spinner'
+import { sendData } from "../../API/sendData";
+import { ThreeDots } from 'react-loader-spinner'
 import { useNavigate } from "react-router-dom";
+import SignUpInput from "./SignUpInput";
 export default function SignUpContainer() {
 
     const navigate = useNavigate();
-    const [sent, setSent] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState({
         email: "",
         name: "",
-        image:"",
-        password:"",
-        
-    });
-    function handleSubmit(event){
-        event.preventDefault();
-        setSent(true)
-        sendData("/auth/sign-up", form)
-        .catch((error) => {
-            console.log(error);
-            alert("Erro por favor digite dados validos")
-            setSent(false);
+        image: "",
+        password: "",
 
-        })
-        .then((value) => {
-             if(value.statusText === "Created"){
-                console.log(value)
-                navigate("/")
-            }  
-        } )
-        
+    });
+    function handleSubmit(event) {
+        event.preventDefault();
+        setIsLoading(true)
+        sendData("/auth/sign-up", form)
+            .catch((error) => {
+                console.log(error);
+                alert("Erro por favor digite dados validos")
+                setIsLoading(false);
+
+            })
+            .then((value) => {
+                if (value.statusText === "Created") {
+                    console.log(value)
+                    navigate("/")
+                }
+            })
+
     }
-    function handleForm(event){
+    function handleForm(event) {
         setForm({
             ...form,
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
     return (
         <Container>
             <Logo></Logo>
-            <FormStyle onSubmit={handleSubmit}>
-                <input  name ="email"placeholder="email" onChange={handleForm}></input>
-                <input type="password" name ="password"placeholder="senha" onChange={handleForm}></input>
-                <input name ="name"placeholder="nome" onChange={handleForm}></input>
-                <input name="image"placeholder="foto" onChange={handleForm}></input>
+            <FormStyle isLoading={isLoading} onSubmit={handleSubmit}>
+                <input disabled={isLoading}
+                    name="email"
+                    placeholder="email"
+                    onChange={handleForm}>
+                </input>
+                <input disabled={isLoading}
+                    type="password"
+                    name="password"
+                    placeholder="senha"
+                    onChange={handleForm}>
+                </input>
+                <input disabled={isLoading}
+                    name="name"
+                    placeholder="nome"
+                    onChange={handleForm}>
+                </input>
+                <input disabled={isLoading}
+                    name="image"
+                    placeholder="foto"
+                    onChange={handleForm}>
+                </input>
                 <ButtonContainer>
-                    <button>{sent ? <ThreeDots color="#FFFFFF"/> : "Cadastrar"}</button>
+                    <button disabled={isLoading}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Cadastrar"}</button>
                 </ButtonContainer>
             </FormStyle>
             <Link to={"/"}>
