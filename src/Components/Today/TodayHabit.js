@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { FaCheckSquare } from "react-icons/fa";
-export default function TodayHabit() {
+export default function TodayHabit({value}) {
     return (
 
         <Wrapper>
             <TextContainer>
-                <h2>Texto aqui</h2>
-                <h4>Sequência atual: texto aqui</h4>
-                <h4>Seu recorde: texto aqui</h4>
+                <h2>{value.name}</h2>
+                <h4>Sequência atual: {value.currentSequence}</h4>
+                <h4>{value.highestSequence}</h4>
             </TextContainer>
             <FaCheckSquare/>
 
