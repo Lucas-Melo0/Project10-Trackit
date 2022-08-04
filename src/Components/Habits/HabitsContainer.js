@@ -38,6 +38,7 @@ const Container = styled.div`
     width: 90vw;
     margin: 0 auto;
     padding: 20px 0;
+    margin-bottom:70px;
 `
 const AddHabitContainer = styled.div`
     display: flex;

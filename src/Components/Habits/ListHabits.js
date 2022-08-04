@@ -11,16 +11,29 @@ export default function ListHabits() {
 
     const { userInfo } = useContext(UserContext);
     const [habitsData, setHabitsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+        useEffect(() => {
+            getHabits(userInfo.token)
+                .catch((value) => console.log(value))
+                .then((value) => setHabitsData(value.data));
+            console.log(habitsData)
+        }, [isLoading])
+    
+    
 
-    useEffect(() => {
-        getHabits(userInfo.token)
-            .catch((value) => console.log(value))
-            .then((value) => setHabitsData(value.data));
-        console.log(habitsData)
-    }, [])
-    if (habitsData.length === 0){
-        return <Loader/>
+    if (habitsData.length === 0) {
+        return <Loader />
     }
+
+    function habitDelete(value) {
+        if (window.confirm("Deseja realmente apagar ?")) {
+            deleteHabit(value.id, userInfo.token);
+            setIsLoading(!isLoading)
+
+        }
+    }
+
+
 
     return (
         <>
@@ -30,7 +43,7 @@ export default function ListHabits() {
 
                         <HabitsCard key={index}>
                             <p>{value.name}</p>
-                            <FaTrash onClick={()=> deleteHabit(value.id,userInfo.token)}/>
+                            <FaTrash onClick={() => habitDelete(value)} />
                             <WeekButtonContainer>
                                 {
                                     weekLetters.map((letters) => <WeekButton>{letters}</WeekButton>)
@@ -63,6 +76,7 @@ const HabitsCard = styled.div`
         color: #666666;
     }
     svg{
+        cursor: pointer;
         fill:#666666;
         position: absolute;
         right: 10px;

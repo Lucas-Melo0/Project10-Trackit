@@ -7,9 +7,6 @@ import { weekLetters } from "../../auxiliary/days";
 
 
 
-
-
-
 export default function Habits({ setButtonStatus }) {
     const { userInfo } = useContext(UserContext)
     const [input, setInput] = useState({ name: "" });
