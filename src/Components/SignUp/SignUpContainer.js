@@ -1,5 +1,5 @@
 import Logo from "../Logo/Logo";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Container } from "../HomePage/HomePageContainer";
 import { FormStyle, ButtonContainer } from "../HomePage/SignIn";
 import { LinkText } from "../HomePage/SignUpLink";
@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 import { sendData } from "../../API/sendData";
 import { ThreeDots } from 'react-loader-spinner'
 import { useNavigate } from "react-router-dom";
-import SignUpInput from "./SignUpInput";
+import { UserContext } from "../UserContext";
 export default function SignUpContainer() {
 
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+    const {isLoading,setIsLoading}= useContext(UserContext);
     const [form, setForm] = useState({
         email: "",
         name: "",
@@ -32,6 +32,7 @@ export default function SignUpContainer() {
             .then((value) => {
                 if (value.statusText === "Created") {
                     console.log(value)
+                    setIsLoading(false);
                     navigate("/")
                 }
             })
@@ -69,7 +70,7 @@ export default function SignUpContainer() {
                     placeholder="foto"
                     onChange={handleForm}>
                 </input>
-                <ButtonContainer>
+                <ButtonContainer isLoading={isLoading}>
                     <button disabled={isLoading}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Cadastrar"}</button>
                 </ButtonContainer>
             </FormStyle>

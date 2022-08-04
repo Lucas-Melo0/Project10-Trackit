@@ -6,6 +6,7 @@ import { getTodayHabits } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import TodayHabit from "./TodayHabit";
 import { useEffect, useState } from "react";
+import Loader from "../Loader/Loader";
 
 
 export default function TodayContainer() {
@@ -17,17 +18,20 @@ export default function TodayContainer() {
 
     },[])
     
-    
+
     const weekday = dayjs().locale("pt-br").format("dddd")
     const month = dayjs().format("MM");
     const day = dayjs().format("DD");
+    
+    
     return (
         <Wrapper>
             <Container>
                 <H3>{weekday}, {day}/{month}</H3>
                 <H5>Nenhum hábito concluído ainda</H5>
                 {
-                    habitInfo.map((value,index)=> {
+                    habitInfo.length === 0 ? <Loader/> 
+                    :  habitInfo.map((value,index)=> {
                    return <TodayHabit key={index} value={value}/>})
                 }
             </Container>

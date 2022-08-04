@@ -12,11 +12,11 @@ import TodayContainer from "./Components/Today/TodayContainer";
 function App() {
 
   const [userInfo, setUserInfo] = useState("")
-
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ userInfo, setUserInfo }}>
+      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading }}>
         <Routes>
           <Route path="/" element={<HomePageContainer />} />
           <Route path="/cadastro" element={<SignUpContainer />} />

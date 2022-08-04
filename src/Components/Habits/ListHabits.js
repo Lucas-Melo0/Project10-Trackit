@@ -6,7 +6,7 @@ import { deleteHabit, getHabits } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-
+import Loader from "../Loader/Loader";
 
 export default function ListHabits() {
 
@@ -19,7 +19,9 @@ export default function ListHabits() {
             .then((value) => setHabitsData(value.data));
         console.log(habitsData)
     }, [])
-    console.log(habitsData)
+    if (habitsData.length === 0){
+        return <Loader/>
+    }
 
     return (
         <>
