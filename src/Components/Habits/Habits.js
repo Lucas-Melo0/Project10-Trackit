@@ -8,50 +8,52 @@ import { weekLetters } from "../../auxiliary/days";
 
 
 
-export default function Habits({setButtonStatus}) {
-    const {userInfo} = useContext(UserContext)
-    const [input, setInput] = useState({name:""});
-    const [days,setDays] = useState([]);
-    const [selected, setSelected] = useState(false);
+
+
+export default function Habits({ setButtonStatus }) {
+    const { userInfo } = useContext(UserContext)
+    const [input, setInput] = useState({ name: "" });
+    const [days, setDays] = useState([]);
     
 
-    function handleChange(event){
+    function handleChange(event) {
         setInput({
             ...input,
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         })
         console.log(input)
-       
+
     }
-   
-    function getDays(index){
-        setDays([...days,index + 1])
-        setSelected(true);
-        if ([...days].includes(index + 1)){
+    function getDays(index) {
+        setDays([...days, index + 1])
+        
+        if ([...days].includes(index + 1)) {
             setDays([...days].filter(element => element !== index + 1))
-            setSelected(false);
+          
         }
         console.log(days)
-        console.log(selected)
+        
     }
 
-    function HandleSubmit(){
-        createHabit({name:input.name,days:days},userInfo.token)
-        .catch((value) => console.log(value))
-        .then((value)=> console.log(value));
+    function HandleSubmit() {
+        createHabit({ name: input.name, days: days }, userInfo.token)
+            .catch((value) => console.log(value))
+            .then((value) => console.log(value));
     }
 
     return (
         <HabitsCard>
-            <input name ="name" onChange={handleChange} placeholder="nome do hábito"></input>
+            <input name="name" onChange={handleChange} placeholder="nome do hábito"></input>
             <WeekButtonContainer>
-                {
-                    weekLetters.map((value,index) => <WeekButton onClick={()=> getDays(index)} selected={selected} >{value}</WeekButton>)
-                }
+            {
+                weekLetters.map((value,index)=> {
+                    return <WeekButton onClick={() => getDays(index)} selected={days.includes(index + 1 )} >{value}</WeekButton>
+                })
+            }
             </WeekButtonContainer>
             <ResultButtonContainer>
-                    <CancelButton onClick={()=>setButtonStatus(false)}>Cancelar</CancelButton>
-                    <SaveButton onClick={HandleSubmit}>Salvar</SaveButton>
+                <CancelButton onClick={() => setButtonStatus(false)}>Cancelar</CancelButton>
+                <SaveButton onClick={HandleSubmit}>Salvar</SaveButton>
             </ResultButtonContainer>
         </HabitsCard>
 
@@ -84,8 +86,7 @@ const WeekButtonContainer = styled.div`
 
     
 `
-
-const WeekButton = styled.button `
+const WeekButton = styled.button`
 
         all:unset;
         text-align: center;
@@ -100,15 +101,15 @@ const WeekButton = styled.button `
 
 `
 
-const ResultButtonContainer = styled.div `
+const ResultButtonContainer = styled.div`
 
     display: flex;
     column-gap:10px;
     justify-content:flex-end
 
 `
-    
-const CancelButton = styled.button `
+
+const CancelButton = styled.button`
 
 
     all:unset;
@@ -118,7 +119,7 @@ const CancelButton = styled.button `
     color: #52B6FF;   
 
 `
-const SaveButton = styled.button `
+const SaveButton = styled.button`
 
 
     all:unset;
@@ -133,4 +134,4 @@ const SaveButton = styled.button `
 
 
 `
-export {WeekButton, WeekButtonContainer}
+export { WeekButton, WeekButtonContainer }

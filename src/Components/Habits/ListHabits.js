@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { weekLetters } from "../../auxiliary/days";
-import { WeekButton, WeekButtonContainer } from "./Habits";
 import { FaTrash } from 'react-icons/fa';
 import { deleteHabit, getHabits } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import Loader from "../Loader/Loader";
-
+import { WeekButtonContainer, WeekButton } from "./Habits";
 export default function ListHabits() {
 
     const { userInfo } = useContext(UserContext);
