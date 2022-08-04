@@ -7,6 +7,7 @@ import GlobalStyle from "./styles/globalStyles";
 import RequireAuth from "./Components/Authentication/RequireAuth";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import TodayContainer from "./Components/Today/TodayContainer";
 
 function App() {
 
@@ -15,20 +16,24 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value ={{userInfo,setUserInfo}}>
+      <UserContext.Provider value={{ userInfo, setUserInfo }}>
         <Routes>
-            <Route path="/" element={<HomePageContainer  />} />
-            <Route path="/cadastro" element={<SignUpContainer />} />
-            <Route path="/habitos" element={
-              <RequireAuth >
-                <HabitsContainer  />
-              </RequireAuth>} />
-              <Route path="/historico" element={
-              <RequireAuth >
-                <HistoryContainer />
-              </RequireAuth>}/>
+          <Route path="/" element={<HomePageContainer />} />
+          <Route path="/cadastro" element={<SignUpContainer />} />
+          <Route path="/habitos" element={
+            <RequireAuth >
+              <HabitsContainer />
+            </RequireAuth>} />
+          <Route path="/historico" element={
+            <RequireAuth >
+              <HistoryContainer />
+            </RequireAuth>} />
+          <Route path="/hoje" element={
+            <RequireAuth >
+              <TodayContainer />
+            </RequireAuth>} />
         </Routes>
-        </UserContext.Provider>
+      </UserContext.Provider>
 
     </>
 

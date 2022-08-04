@@ -8,22 +8,22 @@ export default function FooterContainer() {
             <Link to={"/habitos"}>
                 <FooterButton>Hábitos</FooterButton>
             </Link>
-            <ProgressbarContainer onClick={() => alert("oi")}>
-                <CircularProgressbar styles={buildStyles({
-                    backgroundColor: '#52B6FF',
-                    textColor: '#FFFFFF', trailColor: '#52B6FF',
-                    pathColor: '#FFFFFF'
-                })}
-                    background={true}
-                    value={40}
-                    text={"Hoje"} />
-            </ProgressbarContainer>
+            <Link to={"/hoje"}>
+                <ProgressbarContainer >
+                    <CircularProgressbar styles={buildStyles({
+                        backgroundColor: '#52B6FF',
+                        textColor: '#FFFFFF', trailColor: '#52B6FF',
+                        pathColor: '#FFFFFF'
+                    })}
+                        background={true}
+                        value={40}
+                        text={"Hoje"} />
+                </ProgressbarContainer>
+            </Link>
             <Link to={"/historico"}>
                 <FooterButton>Histórico</FooterButton>
             </Link>
-
         </Container>
-
     )
 }
 
