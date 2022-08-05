@@ -13,10 +13,15 @@ function App() {
 
   const [userInfo, setUserInfo] = useState("")
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState({
+    done: 0,
+    total: 0,
+    percentage: (done, total) => total === 0 ? 0 : (done / total * 100)
+});
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading }}>
+      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading,progress, setProgress }}>
         <Routes>
           <Route path="/" element={<HomePageContainer />} />
           <Route path="/cadastro" element={<SignUpContainer />} />

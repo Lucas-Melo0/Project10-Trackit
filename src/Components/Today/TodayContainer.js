@@ -1,17 +1,20 @@
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { useContext } from "react";
 import styled from "styled-components";
 import { getTodayHabits } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import TodayHabit from "./TodayHabit";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Loader from "../Loader/Loader";
 
 
 export default function TodayContainer() {
     const [habitInfo, setHabitInfo] = useState([]);
-    const {userInfo} = useContext(UserContext);
+    const {userInfo, progress, setProgress} = useContext(UserContext);
+    const weekday = dayjs().locale("pt-br").format("dddd")
+    const month = dayjs().format("MM");
+    const day = dayjs().format("DD");
+    const { done, total, percentage } = progress;
     useEffect(()=> {getTodayHabits(userInfo.token)
         .catch((value)=>console.log(value))
         .then((value)=>setHabitInfo(value.data));
@@ -19,20 +22,29 @@ export default function TodayContainer() {
     },[])
     
 
-    const weekday = dayjs().locale("pt-br").format("dddd")
-    const month = dayjs().format("MM");
-    const day = dayjs().format("DD");
     
     
+    function updateProgress(){
+        setProgress({...progress,done:habitInfo.filter((value)=>value.done === true).length,
+        total: habitInfo.map((value)=> value ).length}); 
+    }
+
+    
+
+
     return (
         <Wrapper>
+            
             <Container>
-                <H3>{weekday}, {day}/{month}</H3>
-                <H5>Nenhum hábito concluído ainda</H5>
+                <H3 onClick={()=>console.log(progress)}>{weekday}, {day}/{month}</H3>
                 {
-                    habitInfo.length === 0 ? <Loader/> 
-                    :  habitInfo.map((value,index)=> {
-                   return <TodayHabit key={index} value={value}/>})
+                    habitInfo !== 0 ? <H6>{percentage(done,total)} % dos hábitos concluídos</H6> : null
+                }
+                {
+                    habitInfo.length === 0 ? <H5>Nenhum hábito concluído ainda</H5>
+                    : 
+                     habitInfo.map((value,index)=> {
+                   return <TodayHabit progress={progress} updateProgress={updateProgress} key={index} value={value}/>})
                 }
             </Container>
         </Wrapper>
@@ -64,6 +76,13 @@ const H3 = styled.h3 `
 `
 const H5 = styled.h5 `
     color: #BABABA;
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 18px;
+
+
+`
+const H6 = styled.h6 `
+    color: #8FC549;
     font-family: 'Lexend Deca', sans-serif;
     font-size: 18px;
 

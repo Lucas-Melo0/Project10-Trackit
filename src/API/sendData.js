@@ -20,4 +20,7 @@ function getTodayHabits(token){
 function checkHabitAsDone(id,token){
     return axiosBase.post(`/habits/${id}/check`,{},{headers: {"Authorization": `Bearer ${token}`}});
 }
-export {sendData, createHabit, getHabits, deleteHabit, getTodayHabits, checkHabitAsDone};
+function unCheckHabitAsDone(id, token){
+    return axiosBase.post(`/habits/${id}/uncheck`,{},{headers: {"Authorization": `Bearer ${token}`}});
+}
+export {sendData, createHabit, getHabits, deleteHabit, getTodayHabits, checkHabitAsDone, unCheckHabitAsDone};

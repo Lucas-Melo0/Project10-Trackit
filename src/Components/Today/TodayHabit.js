@@ -1,21 +1,52 @@
 import styled from "styled-components";
 import { FaCheckSquare } from "react-icons/fa";
-import { checkHabitAsDone } from "../../API/sendData";
+import { checkHabitAsDone, unCheckHabitAsDone } from "../../API/sendData";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
-export default function TodayHabit({value}) {
+export default function TodayHabit({ value, updateProgress, progress }) {
 
-    const {userInfo} = useContext(UserContext);
-    console.log(value,userInfo)
+    const { userInfo } = useContext(UserContext);
+    console.log(value)
+  
+
+
+
+
+    function toggleHabit(value) {
+        if (value.done === true) {
+            unCheckHabitAsDone(value.id, userInfo.token)
+            .then(updateProgress());
+            
+            
+        }
+        else {
+            checkHabitAsDone(value.id, userInfo.token)
+            .then(updateProgress());
+            
+        }
+    }
+    
+    
+    function greenSequenceText(value) {
+        if (value.done === true ) {
+            return true;
+        }
+    }
+    function greenRecordText(value){
+        if (value.done === true && value.highestSequence === value.currentSequence){
+            return true;
+        }
+    }
+
     return (
 
         <Wrapper>
-            <TextContainer>
+            <TextContainer recordText ={greenRecordText(value)}sequenceText={greenSequenceText(value)}>
                 <h2>{value.name}</h2>
                 <h4>Sequência atual: {value.currentSequence}</h4>
-                <h4>{value.highestSequence}</h4>
+                <h5>Seu Recorde: {value.highestSequence}</h5>
             </TextContainer>
-            <FaCheckSquare onClick={()=>checkHabitAsDone(value.id,userInfo.token)} color={value.done ? "#8FC549": null}/>
+            <FaCheckSquare onClick={() => toggleHabit(value)} color={value.done ? "#8FC549" : null} />
 
         </Wrapper>
     )
@@ -54,7 +85,12 @@ const TextContainer = styled.div`
     h4{
     font-family: 'Lexend Deca';
     font-size: 13px;
-    color: #666666;
+    color:${({ sequenceText }) => (sequenceText ? "#8FC549" : "#666666;")};
+    }
+    h5{
+    font-family: 'Lexend Deca';
+    font-size: 13px;
+    color: ${({ recordText }) => (recordText ? "#8FC549" : "#666666;")};
     }
 
 `
