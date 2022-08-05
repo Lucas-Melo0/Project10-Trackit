@@ -19,7 +19,7 @@ export default function ListHabits() {
             console.log(habitsData)
         }, [isLoading])
     
-    
+    console.log(habitsData)
 
     if (habitsData.length === 0) {
         return <Loader />
@@ -33,7 +33,7 @@ export default function ListHabits() {
         }
     }
 
-
+    
 
     return (
         <>
@@ -46,7 +46,7 @@ export default function ListHabits() {
                             <FaTrash onClick={() => habitDelete(value)} />
                             <WeekButtonContainer>
                                 {
-                                    weekLetters.map((letters) => <WeekButton>{letters}</WeekButton>)
+                                    weekLetters.map((letters,index) => <WeekButton selected={value.days.includes(index + 1)} key={index}>{letters}</WeekButton>)
                                 }
                             </WeekButtonContainer>
                         </HabitsCard>
