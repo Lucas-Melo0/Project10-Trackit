@@ -17,7 +17,7 @@ export default function HabitsContainer() {
                     buttonStatus && <Habits setButtonStatus={setButtonStatus}></Habits>
                 }
                 <ListHabits/>
-                <NoHabitsParagraph>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsParagraph>
+                
             </Container>
 
         </Wrapper>
@@ -62,12 +62,7 @@ const AddHabitContainer = styled.div`
     border-radius: 4.6px;
     }
 `
-const NoHabitsParagraph = styled.p `
-    font-size: 18px;
-    color: #666666;
-    font-family: 'Lexend Deca', sans-serif;
 
-`
 
 
 

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { FaCheckSquare } from "react-icons/fa";
+import { checkHabitAsDone } from "../../API/sendData";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 export default function TodayHabit({value}) {
+
+    const {userInfo} = useContext(UserContext);
+    console.log(value,userInfo)
     return (
 
         <Wrapper>
@@ -9,7 +15,7 @@ export default function TodayHabit({value}) {
                 <h4>Sequência atual: {value.currentSequence}</h4>
                 <h4>{value.highestSequence}</h4>
             </TextContainer>
-            <FaCheckSquare/>
+            <FaCheckSquare onClick={()=>checkHabitAsDone(value.id,userInfo.token)} color={value.done ? "#8FC549": null}/>
 
         </Wrapper>
     )

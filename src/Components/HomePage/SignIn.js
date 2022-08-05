@@ -56,7 +56,7 @@ export default function SignIn() {
                 onChange={handleForm}
                 placeholder="senha">
             </input>
-            <ButtonContainer isLoading={isLoading}>
+            <ButtonContainer isLoading={isLoading} >
                 <button>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
             </ButtonContainer>
         </FormStyle>

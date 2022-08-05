@@ -4,14 +4,16 @@ import { createHabit } from "../../API/sendData";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { weekLetters } from "../../auxiliary/days";
+import { ThreeDots } from "react-loader-spinner";
+
 
 
 
 export default function Habits({ setButtonStatus }) {
-    const { userInfo } = useContext(UserContext)
+    const { userInfo, isLoading, setIsLoading } = useContext(UserContext)
     const [input, setInput] = useState({ name: "" });
     const [days, setDays] = useState([]);
-    
+
 
     function handleChange(event) {
         setInput({
@@ -23,34 +25,48 @@ export default function Habits({ setButtonStatus }) {
     }
     function getDays(index) {
         setDays([...days, index + 1])
-        
+
         if ([...days].includes(index + 1)) {
             setDays([...days].filter(element => element !== index + 1))
-          
+
         }
         console.log(days)
-        
+
     }
 
     function HandleSubmit() {
+        setIsLoading(true)
+        console.log(isLoading)
         createHabit({ name: input.name, days: days }, userInfo.token)
-            .catch((value) => console.log(value))
-            .then((value) => console.log(value));
+            .catch((value) => {
+                console.log(value);
+                setIsLoading(false);
+            })
+            .then((value) => {
+                if (value.statusText === "Created") {
+                    console.log(value);
+                    setIsLoading(false);
+                    setButtonStatus(false);
+                }
+
+            });
     }
 
     return (
-        <HabitsCard>
-            <input name="name" onChange={handleChange} placeholder="nome do hábito"></input>
+        <HabitsCard isLoading={isLoading}>
+            <input disabled={isLoading} name="name" onChange={handleChange} placeholder="nome do hábito"></input>
             <WeekButtonContainer>
-            {
-                weekLetters.map((value,index)=> {
-                    return <WeekButton onClick={() => getDays(index)} selected={days.includes(index + 1 )} >{value}</WeekButton>
-                })
-            }
+                {
+                    weekLetters.map((value, index) => {
+                        return <WeekButton disabled={isLoading} onClick={() => getDays(index)} selected={days.includes(index + 1)} >{value}</WeekButton>
+                    })
+                }
             </WeekButtonContainer>
             <ResultButtonContainer>
                 <CancelButton onClick={() => setButtonStatus(false)}>Cancelar</CancelButton>
-                <SaveButton onClick={HandleSubmit}>Salvar</SaveButton>
+                <SaveContainer isLoading={isLoading}>
+                    <SaveButton   onClick={HandleSubmit}> {isLoading ? <ThreeDots color="#FFFFFF" /> : "Salvar"}</SaveButton>
+                </SaveContainer>
             </ResultButtonContainer>
         </HabitsCard>
 
@@ -74,6 +90,7 @@ const HabitsCard = styled.div`
         font-size: 20px;
         color: #666666;
         height: 45px;
+        background-color: ${({isLoading}) => (isLoading ? "#F2F2F2" : "#FFFFFF")};
     }
    
 `
@@ -82,6 +99,28 @@ const WeekButtonContainer = styled.div`
     column-gap: 3px;
 
     
+`
+
+const SaveContainer = styled.div`
+    font-weight: 400;
+    font-size: 20px;
+    color: #FFFFFF;
+    width: inherit;
+    text-align: center;
+    display: flex;
+    width: 84px;
+    height: 35px;
+    
+    button {
+    all: unset;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #52B6FF;
+    opacity: ${({ isLoading }) => (isLoading ? "0.4" : "1")};
+    border-radius: 4.6px;
+    }
 `
 const WeekButton = styled.button`
 

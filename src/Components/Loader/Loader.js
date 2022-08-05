@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {TailSpin} from 'react-loader-spinner'
 export default function Loader(){
+    
     return (
         <Container>
             <TailSpin color="#52B6FF"/>
