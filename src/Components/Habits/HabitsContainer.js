@@ -4,17 +4,17 @@ import { useState } from "react";
 import ListHabits from "./ListHabits";
 export default function HabitsContainer() {
 
-    const [buttonStatus, setButtonStatus] = useState(false);
-
+    const [isOpened, setIsOpened] = useState(false);
+   
     return (
         <Wrapper>
             <Container>
                 <AddHabitContainer>
                     <span>Meus hábitos</span>
-                    <button onClick={()=>setButtonStatus(true)}>+</button>
+                    <button onClick={()=>setIsOpened(true)}>+</button>
                 </AddHabitContainer>
                 {
-                    buttonStatus && <Habits setButtonStatus={setButtonStatus}></Habits>
+                    isOpened && <Habits  setIsOpened={setIsOpened}></Habits>
                 }
                 <ListHabits/>
                 
@@ -39,6 +39,7 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 20px 0;
     margin-bottom:70px;
+    margin-top:70px;
 `
 const AddHabitContainer = styled.div`
     display: flex;
@@ -53,6 +54,7 @@ const AddHabitContainer = styled.div`
     }
     button {
     all:unset;
+    cursor: pointer;
     color: #FFFFFF;
     font-size: 30px;
     text-align: center;

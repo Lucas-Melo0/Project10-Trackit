@@ -55,6 +55,7 @@ const Container = styled.div`
     width: 90vw;
     margin: 0 auto;
     padding: 20px 0 ;
+    margin-top:70px;
     div {
         border-radius: 10px;
         

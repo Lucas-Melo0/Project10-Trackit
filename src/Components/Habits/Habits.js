@@ -8,50 +8,56 @@ import { ThreeDots } from "react-loader-spinner";
 
 
 
-
-export default function Habits({ setButtonStatus }) {
-    const { userInfo, isLoading, setIsLoading } = useContext(UserContext)
-    const [input, setInput] = useState({ name: "" });
+export default function Habits({ setIsOpened }) {
+    const { userInfo, isLoading, setIsLoading, render, setRender } = useContext(UserContext)
+    const [habit, setHabit] = useState({ name: "" });
     const [days, setDays] = useState([]);
 
 
+
     function handleChange(event) {
-        setInput({
-            ...input,
+        setHabit({
+            ...habit,
             [event.target.name]: event.target.value
-        })
-        console.log(input)
+        });
+        
 
     }
     function getDays(index) {
         setDays([...days, index + 1])
 
         if ([...days].includes(index + 1)) {
-            setDays([...days].filter(element => element !== index + 1))
-
+            setDays([...days].filter(element => element !== index + 1));
         }
-        console.log(days)
 
     }
+
 
     function HandleSubmit() {
-        setIsLoading(true)
-        console.log(isLoading)
-        createHabit({ name: input.name, days: days }, userInfo.token)
-            .catch((value) => {
-                console.log(value);
-                setIsLoading(false);
-            })
-            .then((value) => {
-                if (value.statusText === "Created") {
+        
+        if (habit.name === "") {
+            alert("Escreva o nome do hábito.");
+        }
+        else if (days.length === 0) {
+            alert("Escolha pelo menos um dia.");
+        } else {
+            setIsLoading(true)
+            createHabit({ name: habit.name, days: days }, userInfo.token)
+                .catch((value) => {
                     console.log(value);
                     setIsLoading(false);
-                    setButtonStatus(false);
-                }
+                })
+                .then((value) => {
+                    if (value.statusText === "Created") {
+                        setIsLoading(false);
+                        setRender(render + 1);
+                        setIsOpened(false);
 
-            });
+                    }
+                });
+        }
+
     }
-
     return (
         <HabitsCard isLoading={isLoading}>
             <input disabled={isLoading} name="name" onChange={handleChange} placeholder="nome do hábito"></input>
@@ -63,9 +69,9 @@ export default function Habits({ setButtonStatus }) {
                 }
             </WeekButtonContainer>
             <ResultButtonContainer>
-                <CancelButton onClick={() => setButtonStatus(false)}>Cancelar</CancelButton>
+                <CancelButton onClick={() => setIsOpened(false)}>Cancelar</CancelButton>
                 <SaveContainer isLoading={isLoading}>
-                    <SaveButton   onClick={HandleSubmit}> {isLoading ? <ThreeDots color="#FFFFFF" /> : "Salvar"}</SaveButton>
+                    <SaveButton onClick={HandleSubmit}> {isLoading ? <ThreeDots color="#FFFFFF" /> : "Salvar"}</SaveButton>
                 </SaveContainer>
             </ResultButtonContainer>
         </HabitsCard>
@@ -90,7 +96,7 @@ const HabitsCard = styled.div`
         font-size: 20px;
         color: #666666;
         height: 45px;
-        background-color: ${({isLoading}) => (isLoading ? "#F2F2F2" : "#FFFFFF")};
+        background-color: ${({ isLoading }) => (isLoading ? "#F2F2F2" : "#FFFFFF")};
     }
    
 `
@@ -113,6 +119,7 @@ const SaveContainer = styled.div`
     
     button {
     all: unset;
+    cursor: pointer;
     width: inherit;
     display: flex;
     justify-content: center;
@@ -149,6 +156,7 @@ const CancelButton = styled.button`
 
 
     all:unset;
+    cursor: pointer;
     font-family: 'Lexend Deca', sans-serif;
     font-size: 16px;
     text-align: center;
@@ -159,6 +167,7 @@ const SaveButton = styled.button`
 
 
     all:unset;
+    cursor: pointer;
     width: 84px;
     height: 35px;
     border-radius: 4.6px;

@@ -7,16 +7,19 @@ export default function TodayHabit({ value,  toggleHabit }) {
     
     
     function greenSequenceText(value) {
-        if (value.done === true ) {
+        if (value.done === true) {
             return true;
         }
+        
     }
+
+
     function greenRecordText(value){
         if (value.done === true && value.highestSequence === value.currentSequence){
             return true;
         }
     }
-
+   
     return (
 
         <Wrapper>
@@ -42,13 +45,14 @@ const Wrapper = styled.div`
 
     
     svg {
+        cursor: pointer;
         top: 10px;
         right: 30px;
         width: 69px;
         height: 69px;
         position: absolute;
         color:#EBEBEB;
-    }
+    } 
 
 `
 const TextContainer = styled.div`

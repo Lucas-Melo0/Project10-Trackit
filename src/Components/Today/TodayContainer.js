@@ -19,28 +19,26 @@ export default function TodayContainer() {
 
     useEffect(() => {
         getTodayHabits(userInfo.token)
-        .catch((value) => console.log(value))
-        .then((value) => {
-            setHabitInfo(value.data)
-            console.log(percentage)
-            console.log(percentage)
-        });
+            .catch((value) => console.log(value))
+            .then((value) => {
+                setHabitInfo(value.data);
+            });
 
-    }, [render])
-
-            const done = habitInfo.filter((value) => value.done === true).length;
-            const total = habitInfo.length;
-            const finalPercentage = Math.round((done/total)*100)
-            setPercentage(finalPercentage)
+    }, [habitInfo]);
+    
+    
+    const done = habitInfo.filter((value) => value.done === true).length;
+    const total = habitInfo.length;
+    const finalPercentage = Math.round((done / total) * 100);
+    setPercentage(finalPercentage);
 
     function toggleHabit(value) {
 
         if (value.done === true) {
             unCheckHabitAsDone(value.id, userInfo.token)
-                .then((response)=> {
+                .then((response) => {
                     setRender(!render);
                 });
-
 
         }
         else {
@@ -52,20 +50,19 @@ export default function TodayContainer() {
     }
 
 
-
+    
     return (
         <Wrapper>
 
             <Container>
                 <H3>{weekday}, {day}/{month}</H3>
                 {
-                    habitInfo !== 0 ? <H6>{percentage} % dos hábitos concluídos</H6> : null
+                    done === 0 ? <H5>Nenhum hábito concluído ainda</H5>  : <H6>{percentage} % dos hábitos concluídos</H6>
                 }
                 {
-                    habitInfo.length === 0 ? <H5>Nenhum hábito concluído ainda</H5>
-                        :
+                    
                         habitInfo.map((value, index) => {
-                            return <TodayHabit key={index} toggleHabit={toggleHabit} setRender={setRender}  value={value} />
+                            return <TodayHabit key={index} toggleHabit={toggleHabit}  value={value} />
                         })
                 }
             </Container>
@@ -88,6 +85,7 @@ const Container = styled.div`
     width: 90vw;
     margin: 0 auto;
     padding: 20px 0 ;
+    margin-top:70px;
 
 `
 const H3 = styled.h3`

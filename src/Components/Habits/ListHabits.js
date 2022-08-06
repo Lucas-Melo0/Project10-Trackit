@@ -9,34 +9,30 @@ import Loader from "../Loader/Loader";
 import { WeekButtonContainer, WeekButton } from "./Habits";
 export default function ListHabits() {
 
-    const { userInfo } = useContext(UserContext);
+    const { userInfo, render, setRender } = useContext(UserContext);
     const [habitsData, setHabitsData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
         getHabits(userInfo.token)
             .catch((value) => console.log(value))
-            .then((value) => setHabitsData(value.data));
-        console.log(habitsData)
-    }, [isLoading])
+            .then((value) => setHabitsData(value.data.reverse()));
+        
+    }, [render]);
 
-    console.log(habitsData)
+  
 
-     /* if (habitsData.length === 0) {
-         return <Loader />
-     } */
+    
   
     function habitDelete(value) {
         if (window.confirm("Deseja realmente apagar ?")) {
             deleteHabit(value.id, userInfo.token);
-            setIsLoading(!isLoading)
+            setRender(render + 1);
 
         }
     }
-
     
-
+    
     return (
         <>
             {

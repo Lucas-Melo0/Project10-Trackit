@@ -15,13 +15,14 @@ function App() {
   const [userInfo, setUserInfo] = useState("")
   const [isLoading, setIsLoading] = useState(false);
   const [percentage, setPercentage] = useState(0);
+  const [render, setRender] = useState(0);
 
 
 
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading, percentage, setPercentage }}>
+      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading, percentage, setPercentage,render, setRender }}>
         <Routes>
           <Route path="/" element={<HomePageContainer />} />
           <Route path="/cadastro" element={<SignUpContainer />} />

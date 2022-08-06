@@ -21,19 +21,17 @@ export default function SignUpContainer() {
     });
     function handleSubmit(event) {
         event.preventDefault();
-        setIsLoading(true)
+        setIsLoading(true);
         sendData("/auth/sign-up", form)
             .catch((error) => {
-                console.log(error);
-                alert("Erro por favor digite dados validos")
+                alert("Erro por favor digite dados válidos");
                 setIsLoading(false);
 
             })
             .then((value) => {
                 if (value.statusText === "Created") {
-                    console.log(value)
                     setIsLoading(false);
-                    navigate("/")
+                    navigate("/");
                 }
             })
 
@@ -42,12 +40,12 @@ export default function SignUpContainer() {
         setForm({
             ...form,
             [event.target.name]: event.target.value
-        })
+        });
     }
 
     return (
         <Container>
-            <Logo></Logo>
+            <Logo/>
             <FormStyle isLoading={isLoading} onSubmit={handleSubmit}>
                 <input disabled={isLoading}
                     name="email"

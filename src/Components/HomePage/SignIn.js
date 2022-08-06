@@ -19,8 +19,8 @@ export default function SignIn() {
         setIsLoading(true);
         sendData("/auth/login", form)
             .catch((error) => {
-                console.log(error)
-                alert("Digite dados validos");
+                
+                alert("Digite dados válidos");
                 setIsLoading(false);
             })
             .then((value) => {
@@ -29,7 +29,7 @@ export default function SignIn() {
                     localStorage.setItem(value.data.name, JSON.stringify({ token: value.data.token }));
                     setUserInfo(value.data);
                     setIsLoading(false);
-                    navigate("/habitos")
+                    navigate("/hoje");
 
                 }
 
@@ -40,9 +40,9 @@ export default function SignIn() {
             ...form,
             [event.target.name]: event.target.value
         }
-        )
+        );
     }
-    console.log(form)
+
     return (
         <FormStyle isLoading={isLoading} onSubmit={handleSubmit}>
             <input disabled={isLoading}
