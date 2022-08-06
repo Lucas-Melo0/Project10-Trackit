@@ -7,8 +7,7 @@ import { UserContext } from "../UserContext";
 
 export default function FooterContainer() {
 
-    const {progress} = useContext(UserContext);
-    const {done,total,percentage} = progress
+    const {percentage} = useContext(UserContext);
     return (
         <Container>
             <Link to={"/habitos"}>
@@ -22,7 +21,7 @@ export default function FooterContainer() {
                         pathColor: '#FFFFFF'
                     })}
                         background={true}
-                        value={percentage(done,total)}
+                        value={percentage}
                         text={"Hoje"} />
                 </ProgressbarContainer>
             </Link>

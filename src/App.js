@@ -1,6 +1,7 @@
 import HomePageContainer from "./Components/HomePage/HomePageContainer";
 import SignUpContainer from "./Components/SignUp/SignUpContainer";
 import HistoryContainer from "./Components/History/HistoryContainer";
+import ForcedLogin from "./Components/HomePage/ForcedLogin";
 import { UserContext } from "./Components/UserContext";
 import HabitsContainer from "./Components/Habits/HabitsContainer";
 import GlobalStyle from "./styles/globalStyles";
@@ -13,15 +14,14 @@ function App() {
 
   const [userInfo, setUserInfo] = useState("")
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState({
-    done: 0,
-    total: 0,
-    percentage: (done, total) => total === 0 ? 0 : (done / total * 100)
-});
+  const [percentage, setPercentage] = useState(0);
+
+
+
   return (
     <>
       <GlobalStyle />
-      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading,progress, setProgress }}>
+      <UserContext.Provider value={{ userInfo, setUserInfo, isLoading, setIsLoading, percentage, setPercentage }}>
         <Routes>
           <Route path="/" element={<HomePageContainer />} />
           <Route path="/cadastro" element={<SignUpContainer />} />

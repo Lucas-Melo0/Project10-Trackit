@@ -1,7 +1,10 @@
+
 import axiosBase from "./axiosBase";
+
 
 function sendData(url, data){
     return axiosBase.post(url, data);
+    
 };
 
 function createHabit (data, token){
@@ -23,4 +26,9 @@ function checkHabitAsDone(id,token){
 function unCheckHabitAsDone(id, token){
     return axiosBase.post(`/habits/${id}/uncheck`,{},{headers: {"Authorization": `Bearer ${token}`}});
 }
-export {sendData, createHabit, getHabits, deleteHabit, getTodayHabits, checkHabitAsDone, unCheckHabitAsDone};
+
+function getHabitsHistory(token){
+    return axiosBase.get("/habits/history/daily",{ headers: { 'Authorization': `Bearer ${token}` } })
+}
+
+export {sendData, createHabit, getHabits, deleteHabit, getTodayHabits, checkHabitAsDone, unCheckHabitAsDone, getHabitsHistory};

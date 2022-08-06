@@ -1,30 +1,9 @@
 import styled from "styled-components";
 import { FaCheckSquare } from "react-icons/fa";
-import { checkHabitAsDone, unCheckHabitAsDone } from "../../API/sendData";
-import { useContext } from "react";
-import { UserContext } from "../UserContext";
-export default function TodayHabit({ value, updateProgress, progress }) {
+export default function TodayHabit({ value,  toggleHabit }) {
 
-    const { userInfo } = useContext(UserContext);
-    console.log(value)
-  
+   
 
-
-
-
-    function toggleHabit(value) {
-        if (value.done === true) {
-            unCheckHabitAsDone(value.id, userInfo.token)
-            .then(updateProgress());
-            
-            
-        }
-        else {
-            checkHabitAsDone(value.id, userInfo.token)
-            .then(updateProgress());
-            
-        }
-    }
     
     
     function greenSequenceText(value) {

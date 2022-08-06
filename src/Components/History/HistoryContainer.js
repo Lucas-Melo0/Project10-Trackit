@@ -1,13 +1,39 @@
 import styled from "styled-components";
 import Loader from "../Loader/Loader";
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+import { useState, useEffect, useContext } from "react";
+import { getHabitsHistory } from "../../API/sendData";
+import { UserContext } from "../UserContext";
+
 export default function HistoryContainer() {
 
+    const [value, onChange] = useState(new Date());;
+    const [history, setHistory] = useState({});
+    const {userInfo} = useContext(UserContext)
+    useEffect(()=> {
+        getHabitsHistory(userInfo.token).then((res)=> {
+            console.log(res)
+            setHistory(res.data)})
+    },[]);
+    
+    function historyStatus(){
+        if( history[0].habits.length === history[0].habits.filter((value)=> value.done === true).length){
+            console.log("todos feitos")
+        } 
+        else {
+            console.log("nao feito")
+        }
+    }
+    /* historyStatus() */
 
     return (
         <Wrapper>
             <Container>
                 <H3>Histórico</H3>
-                <H5>Em breve você poderá ver o histórico dos seus hábitos aqui!</H5>
+                <Calendar locale="pt-br"
+                onChange={onChange}
+                value={value}/>
             </Container>
         </Wrapper>
 
@@ -29,7 +55,10 @@ const Container = styled.div`
     width: 90vw;
     margin: 0 auto;
     padding: 20px 0 ;
-
+    div {
+        border-radius: 10px;
+        
+    }
 `
 const H3 = styled.h3`
     font-family: 'Lexend Deca', sans-serif;
