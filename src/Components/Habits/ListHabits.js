@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import Loader from "../Loader/Loader";
-import { WeekButtonContainer, WeekButton } from "./Habits";
+import { WeekButtonContainer, WeekButton, changeColorOfButton } from "./Habits";
 export default function ListHabits() {
 
     const { userInfo, render, setRender } = useContext(UserContext);
@@ -22,7 +22,7 @@ export default function ListHabits() {
 
   
 
-    
+   
   
     function habitDelete(value) {
         if (window.confirm("Deseja realmente apagar ?")) {
@@ -47,7 +47,7 @@ export default function ListHabits() {
                                     <FaTrash onClick={() => habitDelete(value)} />
                                     <WeekButtonContainer>
                                         {
-                                            weekLetters.map((letters, index) => <WeekButton selected={value.days.includes(index + 1)} key={index}>{letters}</WeekButton>)
+                                            weekLetters.map((letters, index) => <WeekButton selected={value.days.includes(index + 1) || (value.days.includes(index - 6))} key={index}>{letters}</WeekButton>)
                                         }
                                     </WeekButtonContainer>
                                 </HabitsCard>

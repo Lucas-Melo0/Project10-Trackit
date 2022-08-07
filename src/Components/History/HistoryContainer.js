@@ -5,35 +5,45 @@ import 'react-calendar/dist/Calendar.css';
 import { useState, useEffect, useContext } from "react";
 import { getHabitsHistory } from "../../API/sendData";
 import { UserContext } from "../UserContext";
+import dayjs from 'dayjs';
+
 
 export default function HistoryContainer() {
 
-    const [value, onChange] = useState(new Date());;
-    const [history, setHistory] = useState({});
-    const {userInfo} = useContext(UserContext)
-    useEffect(()=> {
-        getHabitsHistory(userInfo.token).then((res)=> {
-            console.log(res)
-            setHistory(res.data)})
-    },[]);
-    
-    function historyStatus(){
-        if( history[0].habits.length === history[0].habits.filter((value)=> value.done === true).length){
-            console.log("todos feitos")
-        } 
-        else {
-            console.log("nao feito")
-        }
+    const [date,setDate] = useState(new Date());
+    const [history, setHistory] = useState([]);
+    const { userInfo } = useContext(UserContext);
+
+
+    useEffect(() => {
+        getHabitsHistory(userInfo.token).then((value) => {
+            setHistory(value.data);
+        })
+    }, []);
+   
+  function tileClass(history, date){
+    const matchingDate= history.filter((value) => value.day === date);
+    if (matchingDate.length === 1){
+      const doneHistory = matchingDate[0].habits.map((value) => value.done);
+      if (doneHistory.includes(false)){
+        return 'not-completed';
+      } 
+      else {
+        return 'completed';
+      }
     }
-    /* historyStatus() */
+  }
 
     return (
         <Wrapper>
             <Container>
                 <H3>Histórico</H3>
-                <Calendar locale="pt-br"
-                onChange={onChange}
-                value={value}/>
+                <Calendar
+                
+                    onChange={setDate}
+                    value={date}
+                    tileClassName={({ date }) => tileClass(history, dayjs(new Date(date)).format('DD/MM/YYYY'))}
+                />
             </Container>
         </Wrapper>
 
@@ -60,6 +70,14 @@ const Container = styled.div`
         border-radius: 10px;
         
     }
+    .not-completed{
+        color: black;
+        background-color: #EA5766;
+    }
+    .completed{
+        background-color: #8FC549;
+    }
+   
 `
 const H3 = styled.h3`
     font-family: 'Lexend Deca', sans-serif;
