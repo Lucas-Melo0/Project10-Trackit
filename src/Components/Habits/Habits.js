@@ -24,15 +24,28 @@ export default function Habits({ setIsOpened }) {
 
     }
     function getDays(index) {
-        setDays([...days, index + 1])
 
-        if ([...days].includes(index + 1)) {
+        setDays([...days, index === 6 ? 0 : index + 1]);
+
+        if ([...days].includes(index + 1 )) {
             setDays([...days].filter(element => element !== index + 1));
+        }
+        else if ([...days].includes(0)){
+            setDays([...days].filter(element => element !== 0));
         }
 
     }
+    function changeColorOfButton(index) {
+        if (days.includes(index + 1 )){
+            return true;
+        }
+        else if (days.includes(index - 6)){
+            return true;
+        }
+          
+    }
 
-
+    console.log(days)
     function HandleSubmit() {
         
         if (habit.name === "") {
@@ -64,7 +77,7 @@ export default function Habits({ setIsOpened }) {
             <WeekButtonContainer>
                 {
                     weekLetters.map((value, index) => {
-                        return <WeekButton disabled={isLoading} onClick={() => getDays(index)} selected={days.includes(index + 1)} >{value}</WeekButton>
+                        return <WeekButton  key={index} disabled={isLoading} onClick={() => getDays(index)} selected={changeColorOfButton(index)} >{value}</WeekButton>
                     })
                 }
             </WeekButtonContainer>
