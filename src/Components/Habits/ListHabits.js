@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import Loader from "../Loader/Loader";
-import { WeekButtonContainer, WeekButton, changeColorOfButton } from "./Habits";
+import { WeekButtonContainer, WeekButton } from "./Habits";
 export default function ListHabits() {
 
     const { userInfo, render, setRender } = useContext(UserContext);

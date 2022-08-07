@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 export default function HistoryContainer() {
 
-    const [date,setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     const [history, setHistory] = useState([]);
     const { userInfo } = useContext(UserContext);
 
@@ -20,30 +20,31 @@ export default function HistoryContainer() {
             setHistory(value.data);
         })
     }, []);
-   
-  function tileClass(history, date){
-    const matchingDate= history.filter((value) => value.day === date);
-    if (matchingDate.length === 1){
-      const doneHistory = matchingDate[0].habits.map((value) => value.done);
-      if (doneHistory.includes(false)){
-        return 'not-completed';
-      } 
-      else {
-        return 'completed';
-      }
+
+    function tileClass(history, date) {
+        const matchingDate = history.filter((value) => value.day === date);
+        if (matchingDate.length === 1) {
+            const doneHistory = matchingDate[0].habits.map((value) => value.done);
+            if (doneHistory.includes(false)) {
+                return 'not-completed';
+            }
+            else {
+                return 'completed';
+            }
+        }
     }
-  }
 
     return (
         <Wrapper>
             <Container>
                 <H3>Histórico</H3>
-                <Calendar
-                
+                {
+                    history.length === 0 ? <Loader/> : <Calendar
                     onChange={setDate}
                     value={date}
-                    tileClassName={({ date }) => tileClass(history, dayjs(new Date(date)).format('DD/MM/YYYY'))}
-                />
+                    tileClassName={({ date }) => tileClass(history, dayjs(new Date(date)).format('DD/MM/YYYY'))}/>
+                }
+                
             </Container>
         </Wrapper>
 
@@ -73,9 +74,12 @@ const Container = styled.div`
     .not-completed{
         color: black;
         background-color: #EA5766;
+        clip-path:circle(35%)
     }
     .completed{
         background-color: #8FC549;
+        clip-path:circle(35%)
+       
     }
    
 `
