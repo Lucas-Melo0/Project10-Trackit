@@ -14,8 +14,8 @@
 ![CSS](https://img.shields.io/badge/styled-components-20232A?style=for-the-badge&logo=styled-components&logoColor=61DAFB)
 
 
-#  See the project
- <a href="project09-cineflex.vercel.app" target="_blank">Project Deploy</a>
+#  Deployment
+ <a href="https://project10-trackit-neon.vercel.app/" target="_blank">Project Deploy</a>
  
 ## How to run
 
