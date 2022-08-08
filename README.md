@@ -1,8 +1,8 @@
-# Project10-Cineflex
+# Project10-Trackit
 
 #  About the project
  A single page application to  **track the user daily habits**.<br />          
- This is my 9th project at Driven bootcamp
+ This is my 10th project at Driven bootcamp
  
 
 #  Technologies used
