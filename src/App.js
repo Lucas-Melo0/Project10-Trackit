@@ -1,7 +1,6 @@
 import HomePageContainer from "./Components/HomePage/HomePageContainer";
 import SignUpContainer from "./Components/SignUp/SignUpContainer";
 import HistoryContainer from "./Components/History/HistoryContainer";
-import ForcedLogin from "./Components/HomePage/ForcedLogin";
 import { UserContext } from "./Components/UserContext";
 import HabitsContainer from "./Components/Habits/HabitsContainer";
 import GlobalStyle from "./styles/globalStyles";

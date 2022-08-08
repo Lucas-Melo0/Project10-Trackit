@@ -46,10 +46,6 @@ export default function HistoryContainer() {
                 habits: matchingDate[0].habits.map((value) => value)
             }])
         }
-        console.log(history)
-        console.log(selectedHabit)
-        console.log(matchingDate)
-        console.log(selectedHabit)
     }
 
     return (
@@ -84,6 +80,7 @@ const Wrapper = styled.div`
     width: 100vw;
     min-height:90vh;
     background-color: #F2F2F2;
+    margin-bottom:70px;
 
 `
 

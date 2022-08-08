@@ -21,9 +21,7 @@ export default function ListHabits() {
     }, [render]);
 
   
-
    
-  
     function habitDelete(value) {
         if (window.confirm("Deseja realmente apagar ?")) {
             deleteHabit(value.id, userInfo.token);
@@ -37,7 +35,7 @@ export default function ListHabits() {
         <>
             {
                 habitsData.length === 0 ? <NoHabitsParagraph>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsParagraph> 
-                : <>
+                : <> 
                     {
                         habitsData.map((value, index) => {
                             return (

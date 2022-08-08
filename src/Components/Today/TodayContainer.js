@@ -56,6 +56,7 @@ export default function TodayContainer() {
 
             <Container>
                 <H3>{weekday}, {day}/{month}</H3>
+                
                 {
                     done === 0 ? <H5>Nenhum hábito concluído ainda</H5>  : <H6>{percentage} % dos hábitos concluídos</H6>
                 }

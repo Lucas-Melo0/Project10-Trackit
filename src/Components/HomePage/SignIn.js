@@ -19,7 +19,6 @@ export default function SignIn() {
         setIsLoading(true);
         sendData("/auth/login", form)
             .catch((error) => {
-                
                 alert("Digite dados válidos");
                 setIsLoading(false);
             })
@@ -93,6 +92,7 @@ const ButtonContainer = styled.div`
     
     button {
     all: unset;
+    cursor: pointer;
     width: inherit;
     display: flex;
     justify-content: center;
