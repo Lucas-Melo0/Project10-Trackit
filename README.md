@@ -2,7 +2,7 @@
 
 #  About the project
  A single page application to  **track the user daily habits**.<br />          
- This is my 10th project at Driven bootcamp
+
  
 
 #  Technologies used
@@ -12,6 +12,11 @@
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![Axios](https://img.shields.io/badge/axios-20232A?style=for-the-badge&logo=axios&logoColor=61DAFB)
 ![CSS](https://img.shields.io/badge/styled-components-20232A?style=for-the-badge&logo=styled-components&logoColor=61DAFB)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/106865843/197388597-1665fb6a-a5a6-423b-87f9-55314ba80480.gif" alt="animated" />
+</p>
+
 
 
 #  Deployment
