@@ -1,4 +1,4 @@
-# Project10-Trackit
+# Trackit
 
 #  About the project
  A single page application to  **track the user daily habits**.<br />          
